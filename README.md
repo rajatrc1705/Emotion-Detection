@@ -13,8 +13,10 @@ pip install -r requirements.txt
 ## Setting up Environment
 Follow these steps before starting contributions to setup the environment correctly.
 
+Step 1: Fork The Main Repo and Clone It
+
 ```
-git clone https://github.com/rajatrc1705/Emotion-Detection.git
+git clone https://github.com/<username>/Emotion-Detection.git
 ```
 ```
 cd Emotion-Detection
