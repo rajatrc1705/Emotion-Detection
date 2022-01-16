@@ -44,6 +44,9 @@ Make new feature branch to add the new feature.
 Make pull request.
 
 Video references:
+
 [Forking and Cloning](https://www.youtube.com/watch?v=OODDLyvePr8)
+
 [Working on an Issue](https://www.youtube.com/watch?v=2Y8AkBUbrNU)
+
 [Creating a Pull Request](https://www.youtube.com/watch?v=8Bx9e8uk8ko)
