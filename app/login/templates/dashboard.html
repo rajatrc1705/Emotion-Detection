@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div style="background-color:#ffffff;">
+    <div class="row">
+        <div class="col-lg-5" style="margin: auto;">
+            <h1 class="text-center" style="color:#1DA1F2;"><b>Dashboard</b></h1>
+            <div ><img src="{% url 'facecam_feed' %}" width="800" height="550"></div>
+        </div>
+    </div>
+    
+</div>
+
+<span>Hello , {{request.user }} </span>
+<span><a href="{% url 'logout' %}">Logout</a></span>
+
+{% endblock %}
