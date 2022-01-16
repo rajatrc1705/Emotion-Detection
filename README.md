@@ -10,6 +10,25 @@ To install dependencies:
 pip install -r requirements.txt
 ```
 
+## Setting up Environment
+Follow these steps before starting contributions to setup the environment correctly.
+
+```
+git clone https://github.com/rajatrc1705/Emotion-Detection.git
+```
+```
+cd Emotion-Detection
+```
+```
+conda create --name lyproject python=3.8
+```
+```
+conda activate lyproject
+```
+```
+pip install -r requirements.txt
+```
+
 ## Contribute
 To start contributions, please fork the project first.
 If you already have forked the project, fetch any updates from upstream repository using git pull.
