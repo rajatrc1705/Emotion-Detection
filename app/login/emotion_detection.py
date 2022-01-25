@@ -14,7 +14,7 @@ from torch.utils.data import DataLoader
 from PIL import Image
 from login.Model import Net
 from auth.settings import BASE_DIR
-
+from sys import platform
 
 class Emotion_detection():
     def __init__(self):
@@ -29,8 +29,12 @@ class Emotion_detection():
         model_load.load_state_dict(torch.load(
             BASE_DIR / 'best_checkpoint.model', map_location=torch.device('cpu')))
         model_load.eval()
-        cascPath = os.path.dirname(cv2.__file__) + \
-            "\\data\\haarcascade_frontalface_alt2.xml"
+
+        if platform == "linux":    
+            cascPath = os.path.dirname(cv2.__file__) + "/data/haarcascade_frontalface_alt2.xml"
+        else:
+            cascPath = os.path.dirname(cv2.__file__) + "\\data\\haarcascade_frontalface_alt2.xml"
+        print("CascPath ", cascPath)
         faceCascade = cv2.CascadeClassifier(cascPath)
 
         frame = self.vs.read()
