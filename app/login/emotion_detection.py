@@ -30,6 +30,7 @@ class Emotion_detection():
             BASE_DIR / 'best_checkpoint.model', map_location=torch.device('cpu')))
         model_load.eval()
 
+        # Sounak Comment
         if platform == "linux":    
             cascPath = os.path.dirname(cv2.__file__) + "/data/haarcascade_frontalface_alt2.xml"
         else:
