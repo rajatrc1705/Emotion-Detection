@@ -7,14 +7,17 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import StreamingHttpResponse
 from login.emotion_detection import Emotion_detection
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
 # Create your views here.
+
  
 def indexView(request):
     return render(request,'home.html')
 
 def aboutView(request):
     return render(request,'aboutus.html') 
+
 
 @login_required(login_url='login_url')  
 def dashboardView(request):
@@ -38,9 +41,13 @@ def registerView(request):
 
         context = {'form' :form}
         return render(request,'register.html',context) 
-    
+
+global username
+
 def loginView(request): 
     if request.user.is_authenticated:
+        global username
+        username=request.user
         return redirect('dashboard')
     else:
         if request.method == "POST" :
@@ -51,6 +58,7 @@ def loginView(request):
 
             if user is not None:
                 login(request,user)
+                username=request.user
                 return redirect('dashboard')
             else:
                 messages.info(request, 'Username or Password is Incorrect!')
@@ -63,6 +71,14 @@ def logoutView(request):
     logout(request)
     return redirect('login_url')
 
+#rest api
+
+class ReactView(APIView):
+    
+    def get(self, request):
+        global username
+        detail =  {"name": str(username),"detail": "sdfasdf"}
+        return Response(detail)
 
 global a
 b=True
@@ -71,16 +87,25 @@ def facecam_feed(request):
     try:
         global a
         a=Emotion_detection()
-        x=gen(a)
+
         return StreamingHttpResponse(gen(a), content_type="multipart/x-mixed-replace;boundary=frame")
     except: 
         pass
 
+
+
 def gen(camera):
     global b
     b=True
+    
     while b:
         frame = camera.get_frame()
+        
         yield(b'--frame\r\n'
               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
               
+# def disableCamera(request):
+#     global a
+#     a.vs.stream.release()
+    

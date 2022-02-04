@@ -1,4 +1,4 @@
-from imutils.video import VideoStream, FPS
+from imutils.video import WebcamVideoStream, FPS
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -18,11 +18,12 @@ from sys import platform
 
 class Emotion_detection():
     def __init__(self):
-        self.vs = VideoStream(src=0).start()
+        self.vs = WebcamVideoStream(src=0).start()
         self.fps = FPS().start()
 
     def __del__(self):
         cv2.destroyAllWindows()
+        self.vs.stream.release()
 
     def get_frame(self):
         model_load = Net()
@@ -35,10 +36,10 @@ class Emotion_detection():
             cascPath = os.path.dirname(cv2.__file__) + "/data/haarcascade_frontalface_alt2.xml"
         else:
             cascPath = os.path.dirname(cv2.__file__) + "\\data\\haarcascade_frontalface_alt2.xml"
-        print("CascPath ", cascPath)
         faceCascade = cv2.CascadeClassifier(cascPath)
 
         frame = self.vs.read()
+        
         frame = cv2.flip(frame, 1)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = faceCascade.detectMultiScale(gray,
@@ -57,11 +58,12 @@ class Emotion_detection():
     #     cv2.imshow('Video', frame)
 
         if face_detected == 1:
+            
             roi = frame[y:y+h, x:x+w]
             # cv2.imshow('Face', roi)
         else:
             roi = frame
-        key = cv2.waitKey(5) & 0xFF
+       
         gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
         gray = cv2.resize(gray, (48, 48))
     #     gray.resize(48, 48)
@@ -81,6 +83,5 @@ class Emotion_detection():
     #     print(str(torch.max(output.data, 1)))
         output = torch.max(output.data, 1)
         self.fps.update()
-
         ret, jpeg = cv2.imencode('.jpg', frame)
         return jpeg.tobytes()

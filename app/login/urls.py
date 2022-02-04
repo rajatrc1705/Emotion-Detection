@@ -10,4 +10,6 @@ urlpatterns =  [
     path('register/',views.registerView,name="register_url"),
     path('logout/',views.logoutView,name="logout"), 
     path('facecam_feed',views.facecam_feed,name="facecam_feed"),
+    path('wel/', views.ReactView.as_view(), name="restapi"),
+    # path('disableCamera/', views.disableCamera, name='disableCamera'),
 ]
