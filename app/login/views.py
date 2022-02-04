@@ -10,25 +10,35 @@ from login.emotion_detection import Emotion_detection
 from rest_framework.views import APIView
 from rest_framework.response import Response
 # Create your views here.
+global username
 
- 
 def indexView(request):
+    global username
+    username=request.user
     return render(request,'home.html')
 
 def aboutView(request):
+    global username
+    username=request.user
     return render(request,'aboutus.html') 
 
 
 @login_required(login_url='login_url')  
 def dashboardView(request):
+    global username
+    username=request.user
     return render(request,'dashboard.html') 
 
 @login_required(login_url='login_url')  
 def testView(request):
+    global username
+    username=request.user
     return render(request,'test.html')     
 
 def registerView(request): 
     if request.user.is_authenticated:
+        global username
+        username=request.user
         return redirect('dashboard')
     else:
         form = CreateUserForm()
@@ -42,12 +52,10 @@ def registerView(request):
         context = {'form' :form}
         return render(request,'register.html',context) 
 
-global username
+
 
 def loginView(request): 
     if request.user.is_authenticated:
-        global username
-        username=request.user
         return redirect('dashboard')
     else:
         if request.method == "POST" :
@@ -58,7 +66,6 @@ def loginView(request):
 
             if user is not None:
                 login(request,user)
-                username=request.user
                 return redirect('dashboard')
             else:
                 messages.info(request, 'Username or Password is Incorrect!')
