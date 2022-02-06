@@ -1,3 +1,4 @@
+import imp
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -9,36 +10,34 @@ from django.http import StreamingHttpResponse
 from login.emotion_detection import Emotion_detection
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from thought_feed import views
 # Create your views here.
-global username
+
 
 def indexView(request):
-    global username
-    username=request.user
-    return render(request,'home.html')
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    else:
+        return render(request,'home.html')
 
 def aboutView(request):
-    global username
-    username=request.user
     return render(request,'aboutus.html') 
+
+@login_required(login_url='login_url') 
+def thoughtFeed(request):
+    return views.index(request)
 
 
 @login_required(login_url='login_url')  
 def dashboardView(request):
-    global username
-    username=request.user
     return render(request,'dashboard.html') 
 
 @login_required(login_url='login_url')  
 def testView(request):
-    global username
-    username=request.user
     return render(request,'test.html')     
 
 def registerView(request): 
     if request.user.is_authenticated:
-        global username
-        username=request.user
         return redirect('dashboard')
     else:
         form = CreateUserForm()
@@ -78,14 +77,6 @@ def logoutView(request):
     logout(request)
     return redirect('login_url')
 
-#rest api
-
-class ReactView(APIView):
-    
-    def get(self, request):
-        global username
-        detail =  {"name": str(username),"detail": "sdfasdf"}
-        return Response(detail)
 
 global a
 b=True

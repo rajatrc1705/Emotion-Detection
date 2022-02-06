@@ -5,12 +5,19 @@
     <div class="col-lg-5" style="margin: auto">
       <h1 class="text-center" style="color: #1da1f2"><b>Dashboard</b></h1>
 
-      <div><img src="{% url 'facecam_feed' %}" width="800" height="550" /></div>
+      <div>
+        <img
+          src="{% url 'facecam_feed' %}"
+          alt="There was some error turning on your live feed please try refreshing this page"
+          width="800"
+          height="550"
+        />
+      </div>
     </div>
   </div>
 </div>
 
-<span>Hello , {{request.user }} </span>
+<div>Hello , {{request.user }}</div>
 <span><a href="{% url 'logout' %}">Logout</a></span>
 {% comment %}
 <script
