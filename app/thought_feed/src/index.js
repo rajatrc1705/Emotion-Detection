@@ -1,6 +1,6 @@
 import React , {Component} from "react";
-import Feed from "./components/Feed";
-import "./components/App.css";
+import Feed from "./components/Feed/Feed";
+import "./index.css";
 import ReactDOM,{render} from 'react-dom';
 // import axios from 'axios';
 

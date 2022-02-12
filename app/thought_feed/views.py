@@ -14,5 +14,5 @@ def index(request, *args, **kwargs):
 class ReactView(APIView):
     def get(self, request):
         global username
-        detail =  {"name": str(username),"detail": "sdfasdf"}
+        detail =  {"name": str(username)}
         return Response(detail)
