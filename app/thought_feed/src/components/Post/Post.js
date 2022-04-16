@@ -4,6 +4,8 @@ import Avatar from '@mui/material/Avatar';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CommentsDialog from "../CommentsDialog/CommentsDialog";
 import LikePost from "../LikePost/LikePost"
+
+//individual post component which will be used in Feed
 const Post = forwardRef(
   ({ displayName,  verified, text, image, avatar,id }, ref) => {
   

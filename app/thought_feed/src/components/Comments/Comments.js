@@ -2,6 +2,9 @@ import React,{forwardRef} from "react";
 import Avatar from '@mui/material/Avatar';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import "./Comments.css"
+
+//Comment pop up
+//input userName , avatar, commentText
 const Comments= forwardRef(
 ({userName,avatar,comment},ref)=>{
 

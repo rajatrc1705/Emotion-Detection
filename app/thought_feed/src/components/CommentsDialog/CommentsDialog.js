@@ -11,6 +11,7 @@ const CommentsDialog=({id,avatar})=>{
     const [commentsection,setCommentSection]=useState([]);
     const [isOpen,setOpen]=useState(()=>false);
     
+    //called once before loading
     useEffect(() => {
         const colref=collection(db,"posts/"+id+"/comments");
         const q=query(colref,orderBy("timestamp","desc"));
@@ -19,15 +20,11 @@ const CommentsDialog=({id,avatar})=>{
             return unsub;
       }, []);
     
+
     const toggle=()=>{
         setOpen(!isOpen);
     }
-    // if(isOpen){
-    //     document.body.classList.add('active-popUp');
-    // }
-    // else{
-    //     document.body.classList.remove('active-popUp');
-    // }
+
 return (
     <>
     <button className="commentsbutton" onClick={toggle}>

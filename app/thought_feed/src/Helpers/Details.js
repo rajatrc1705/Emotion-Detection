@@ -1,7 +1,10 @@
 import axios from 'axios';
 import {useState,useEffect} from 'react'
 
+
+//used to get username from django restAPI
 const Details=()=>{
+
 const [data,setData]=useState([]);
     useEffect(()=>{
  getData();

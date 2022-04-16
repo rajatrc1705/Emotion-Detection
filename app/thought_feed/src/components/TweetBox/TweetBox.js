@@ -6,11 +6,14 @@ import db from "../../Helpers/firebase";
 import Details from "../../Helpers/Details";
 import { doc, addDoc, collection, serverTimestamp } from "firebase/firestore";
 
+//tweetBox component where we input our thoughts and image urls
+
 function TweetBox() {
   const [tweetMessage, setTweetMessage] = useState("");
   const [tweetImage, setTweetImage] = useState("");
   const data=Details();
   let likes=[]
+  //adding tweet in firestore
   const sendTweet = (e) => {
     e.preventDefault();
     if(tweetMessage.length!=0||tweetImage.length!=0)

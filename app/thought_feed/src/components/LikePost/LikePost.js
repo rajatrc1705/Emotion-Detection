@@ -15,6 +15,7 @@ const LikePost=({id,avatar})=>{
     const [isOpen,setOpen]=useState(()=>false);
     const [username,setUsername]=useState("");
     //for getting users who liked from firebase
+    //called only once before loading
     useEffect(() => {
         const docRef=doc(db,"posts",id);
         const snap=onSnapshot(docRef,(ss)=>{
@@ -25,18 +26,22 @@ const LikePost=({id,avatar})=>{
         return snap;
       }, []);
       //getting name from django using  RESTAPI 
-      useEffect(()=>{
-        axios.get('http://localhost:8000/thought/wel/')
-        .then(res => {
-            setUsername(res.data.name); 
-            
-            });
+      //called once before loading
+    useEffect(()=>{
+    axios.get('http://localhost:8000/thought/wel/')
+    .then(res => {
+        setUsername(res.data.name); 
+        
+        });
     },[]);
     //toggling liked post after getting username
+    //called everytime username or usersArray
     useEffect(()=>{
         toggleLike(usersArray.includes(username));
     },[username,usersArray]);
 
+
+    
     const addLike=()=>{
         const docRef = doc(db, 'posts', id);
         setDoc(docRef, { likes: arrayUnion(username) }, { merge: true });

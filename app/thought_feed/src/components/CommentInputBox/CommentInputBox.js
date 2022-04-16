@@ -4,7 +4,11 @@ import AddCommentIcon from '@mui/icons-material/AddComment';
 import Detail from "../../Helpers/Details";
 import db from "../../Helpers/firebase";
 import './CommentInputBox.css'
+
+//Text field to input comments
+
 const CommentInputBox=({id})=>{
+    
     const [userComment,setUserComment]=useState("");
     const username=Detail().name;
 

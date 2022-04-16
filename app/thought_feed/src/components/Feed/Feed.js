@@ -6,9 +6,11 @@ import db from "../../Helpers/firebase";
 import FlipMove from "react-flip-move";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 
+//feed component where all post will show up
 function Feed() {
   const [posts, setPosts] = useState([]);
 
+  //called once before loading
   useEffect(() => {
     const colref=collection(db,"posts");
     const q=query(colref,orderBy("timestamp","desc"));
